@@ -16,6 +16,6 @@ const Rules = () => {
       </div>
     </div>
   );
-};
+};  
 
 export default Rules;
