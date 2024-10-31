@@ -1,21 +1,17 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Play, Pause, RotateCcw } from 'lucide-react'
+import { Play, Pause, RotateCcw, Maximize, Minimize } from 'lucide-react'
 
 export default function Timer() {
-  const [hours, setHours] = useState(0)
-  const [minutes, setMinutes] = useState(0)
-  const [seconds, setSeconds] = useState(0)
-  const [isRunning, setIsRunning] = useState(() => JSON.parse(localStorage.getItem('isRunning') || 'false'))
-  const [timeLeft, setTimeLeft] = useState(() => JSON.parse(localStorage.getItem('timeLeft') || '0'))
+  const [hours, setHours] = useState(parseInt(localStorage.getItem("hours")) || 0)
+  const [minutes, setMinutes] = useState(parseInt(localStorage.getItem("minutes")) || 0)
+  const [seconds, setSeconds] = useState(parseInt(localStorage.getItem("seconds")) || 0)
+  const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem("isRunning")) || false)
+  const [timeLeft, setTimeLeft] = useState(parseInt(localStorage.getItem("timeLeft")) || 0)
+  const [isFullScreen, setIsFullScreen] = useState(false)
   const intervalRef = useRef(null)
-
-  useEffect(() => {
-    localStorage.setItem('timeLeft', JSON.stringify(timeLeft))
-    localStorage.setItem('isRunning', JSON.stringify(isRunning))
-  }, [timeLeft, isRunning])
+  const containerRef = useRef(null)
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
@@ -24,13 +20,17 @@ export default function Timer() {
       }, 1000)
     } else if (timeLeft === 0 && isRunning) {
       setIsRunning(false)
-      alert('Your timer has finished!')
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      alert('Time is up!')
     }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
-    }
-  }, [isRunning, timeLeft])
+
+    localStorage.setItem("timeLeft", timeLeft)
+    localStorage.setItem("isRunning", JSON.stringify(isRunning))
+    localStorage.setItem("hours", hours)
+    localStorage.setItem("minutes", minutes)
+    localStorage.setItem("seconds", seconds)
+
+    return () => clearInterval(intervalRef.current)
+  }, [isRunning, timeLeft, hours, minutes, seconds])
 
   const handleStart = () => {
     if (hours === 0 && minutes === 0 && seconds === 0) return
@@ -40,12 +40,44 @@ export default function Timer() {
 
   const handleStop = () => {
     setIsRunning(false)
+    clearInterval(intervalRef.current)
   }
 
   const handleRestart = () => {
     setIsRunning(false)
     setTimeLeft(hours * 3600 + minutes * 60 + seconds)
   }
+
+  const handleScroll = (type, value) => {
+    if (type === 'hours') setHours(value)
+    if (type === 'minutes') setMinutes(value)
+    if (type === 'seconds') setSeconds(value)
+  }
+
+  const toggleFullScreen = () => {
+    if (!isFullScreen) {
+      if (containerRef.current.requestFullscreen) {
+        containerRef.current.requestFullscreen()
+      }
+      setIsFullScreen(true)
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      }
+      setIsFullScreen(false)
+    }
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isFullScreen])
 
   const formatTime = (time) => {
     const h = Math.floor(time / 3600)
@@ -55,93 +87,82 @@ export default function Timer() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
-        <div className="p-4 border-b">
-          <h1 className="text-2xl font-bold text-center">Countdown Timer</h1>
+    <div ref={containerRef} className="flex items-center justify-center min-h-screen bg-slate-900 p-4">
+      <div className="w-full max-w-xs">
+        {/* Time Picker - Only show when not running */}
+        {!isRunning && (
+          <>
+            <div className="text-center mb-4 text-3xl text-white font-semibold">Set Timer</div>
+            <div className="flex justify-center space-x-4 mb-4">
+              {['hours', 'minutes', 'seconds'].map((type) => (
+                <div 
+                  key={type} 
+                  className="relative w-16 h-48 bg-slate-800 rounded-lg overflow-hidden"
+                >
+                  <div className="absolute top-0 w-full h-12 bg-gradient-to-b from-slate-800 to-transparent pointer-events-none z-10" />
+                  <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-slate-800 to-transparent pointer-events-none z-10" />
+                  <div className="h-full overflow-y-scroll snap-y snap-mandatory scrollbar-hide">
+                    <div className="text-center pt-[88px] pb-[88px]">
+                      {Array.from({ length: type === 'hours' ? 24 : 60 }, (_, i) => i).map((value) => (
+                        <div
+                          key={value}
+                          className={`h-12 flex items-center justify-center cursor-pointer snap-center ${
+                            (type === 'hours' && value === hours) ||
+                            (type === 'minutes' && value === minutes) ||
+                            (type === 'seconds' && value === seconds)
+                              ? 'text-white text-2xl font-bold'
+                              : 'text-slate-500 text-xl'
+                          }`}
+                          onClick={() => handleScroll(type, value)}
+                        >
+                          {String(value).padStart(2, '0')}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Timer Display */}
+        <div className="text-5xl font-bold text-center mb-6 text-white font-mono">
+          {formatTime(timeLeft)}
         </div>
-        <div className="p-4">
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div>
-              <label htmlFor="hours" className="block text-sm font-medium text-gray-700 mb-1">Hours</label>
-              <input
-                type="number"
-                id="hours"
-                min="0"
-                max="23"
-                value={hours}
-                onChange={(e) => setHours(Math.min(23, Math.max(0, parseInt(e.target.value) || 0)))}
-                className="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-            <div>
-              <label htmlFor="minutes" className="block text-sm font-medium text-gray-700 mb-1">Minutes</label>
-              <input
-                type="number"
-                id="minutes"
-                min="0"
-                max="59"
-                value={minutes}
-                onChange={(e) => setMinutes(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
-                className="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-            <div>
-              <label htmlFor="seconds" className="block text-sm font-medium text-gray-700 mb-1">Seconds</label>
-              <input
-                type="number"
-                id="seconds"
-                min="0"
-                max="59"
-                value={seconds}
-                onChange={(e) => setSeconds(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
-                className="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-          </div>
-          <motion.div
-            className="text-5xl font-bold text-center mb-6 text-gray-800"
-            key={timeLeft}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          >
-            {formatTime(timeLeft)}
-          </motion.div>
-          <div className="flex justify-center space-x-4">
-            <AnimatePresence mode="wait">
-              {!isRunning ? (
-                <motion.button
-                  key="start"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={handleStart}
-                  disabled={isRunning}
-                  className="flex items-center px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                >
-                  <Play className="mr-2 h-4 w-4" /> 
-                </motion.button>
-              ) : (
-                <motion.button
-                  key="stop"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={handleStop}
-                  disabled={!isRunning}
-                  className="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                >
-                  <Pause className="mr-2 h-4 w-4" /> 
-                </motion.button>
-              )}
-            </AnimatePresence>
-            <button onClick={handleRestart} className="flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-              <RotateCcw className="mr-2 h-4 w-4" /> 
+
+        {/* Control Buttons */}
+        <div className="flex justify-center space-x-3">
+          {!isRunning ? (
+            <button
+              onClick={handleStart}
+              className="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+            >
+              <Play className="mr-2 h-4 w-4" />
+              Start
             </button>
-          </div>
+          ) : (
+            <button
+              onClick={handleStop}
+              className="flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            >
+              <Pause className="mr-2 h-4 w-4" />
+              Stop
+            </button>
+          )}
+          <button
+            onClick={handleRestart}
+            className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Restart
+          </button>
+          <button
+            onClick={toggleFullScreen}
+            className="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+          >
+            {isFullScreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+          </button>
         </div>
       </div>
     </div>
