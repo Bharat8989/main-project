@@ -70,6 +70,7 @@ export default function Stopwatch() {
   };
 
   return (
+    <div className='p-11'>
     <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 rounded-lg shadow-xl max-w-md mx-auto">
       <div className="text-6xl font-bold text-white mb-8 text-center">
         {formatTime(time)}
@@ -102,6 +103,7 @@ export default function Stopwatch() {
           </ul>
         </div>
       )}
+    </div>
     </div>
   );
 }
