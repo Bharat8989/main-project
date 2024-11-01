@@ -91,6 +91,24 @@ export default function Stopwatch() {
       ref={stopwatchRef}
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r bg-transparent p-4"
     >
+          <meta charset="UTF-8" />
+<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A comprehensive timer application built using React, featuring time management tools such as a stopwatch and full-screen timer." />
+<meta name="author" content="Bharat Kadam" />
+<meta name="keywords" content="Clock, React App, Time Zones, Bharat Kadam, World Clock, Indian Time Zone, Full-Screen Timer, Stopwatch, Timer" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="English" />
+<meta property="og:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta property="og:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta property="og:image" content="URL_to_your_app_image" /> */}
+{/* <meta property="og:url" content="https://yourappurl.com" /> */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta name="twitter:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta name="twitter:image" content="URL_to_your_app_image" /> */}
+{/* <meta name="canonical" content="https://yourappurl.com" /> */}
+
       <h1 className="text-6xl font-bold text-center mb-4 text-white ">Stopwatch</h1>
       <div className="bg-gradient-to-r bg-transparent  p-8 rounded-lg shadow-2xl max-w-lg md:max-w-2xl w-full mx-auto mt-6">
         <div className="text-center text-7xl md:text-7xl font-bold text-white mb-8">

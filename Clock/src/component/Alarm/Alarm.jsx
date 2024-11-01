@@ -92,6 +92,24 @@ export default function Component() {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white p-7">
+          <meta charset="UTF-8" />
+<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A comprehensive timer application built using React, featuring time management tools such as a stopwatch and full-screen timer." />
+<meta name="author" content="Bharat Kadam" />
+<meta name="keywords" content="Clock, React App, Time Zones, Bharat Kadam, World Clock, Indian Time Zone, Full-Screen Timer, Stopwatch, Timer" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="English" />
+<meta property="og:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta property="og:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta property="og:image" content="URL_to_your_app_image" /> */}
+{/* <meta property="og:url" content="https://yourappurl.com" /> */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta name="twitter:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta name="twitter:image" content="URL_to_your_app_image" /> */}
+{/* <meta name="canonical" content="https://yourappurl.com" /> */}
+
      <h1 className="text-6xl font-bold text-center mb-4 p-8">Alarm</h1>
 
       {alarmMessage && (

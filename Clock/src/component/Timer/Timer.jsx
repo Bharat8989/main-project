@@ -1,99 +1,121 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Play, Pause, RotateCcw, Maximize, Minimize } from 'lucide-react'
+// import { Helmet } from 'react-helmet-async';
+import { useState, useEffect, useRef } from 'react';
+import { Play, Pause, RotateCcw, Maximize, Minimize } from 'lucide-react';
 
 export default function Timer() {
-  const [hours, setHours] = useState(parseInt(localStorage.getItem("hours")) || 0)
-  const [minutes, setMinutes] = useState(parseInt(localStorage.getItem("minutes")) || 0)
-  const [seconds, setSeconds] = useState(parseInt(localStorage.getItem("seconds")) || 0)
-  const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem("isRunning")) || false)
-  const [timeLeft, setTimeLeft] = useState(parseInt(localStorage.getItem("timeLeft")) || 0)
-  const [isFullScreen, setIsFullScreen] = useState(false)
-  const intervalRef = useRef(null)
-  const containerRef = useRef(null)
+  const [hours, setHours] = useState(parseInt(localStorage.getItem("hours")) || 0);
+  const [minutes, setMinutes] = useState(parseInt(localStorage.getItem("minutes")) || 0);
+  const [seconds, setSeconds] = useState(parseInt(localStorage.getItem("seconds")) || 0);
+  const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem("isRunning")) || false);
+  const [timeLeft, setTimeLeft] = useState(parseInt(localStorage.getItem("timeLeft")) || 0);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const intervalRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
       intervalRef.current = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1)
-      }, 1000)
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
     } else if (timeLeft === 0 && isRunning) {
-      setIsRunning(false)
-      alert('Time is up!')
+      setIsRunning(false);
+      alert('Time is up!');
     }
 
-    localStorage.setItem("timeLeft", timeLeft)
-    localStorage.setItem("isRunning", JSON.stringify(isRunning))
-    localStorage.setItem("hours", hours)
-    localStorage.setItem("minutes", minutes)
-    localStorage.setItem("seconds", seconds)
+    localStorage.setItem("timeLeft", timeLeft);
+    localStorage.setItem("isRunning", JSON.stringify(isRunning));
+    localStorage.setItem("hours", hours);
+    localStorage.setItem("minutes", minutes);
+    localStorage.setItem("seconds", seconds);
 
-    return () => clearInterval(intervalRef.current)
-  }, [isRunning, timeLeft, hours, minutes, seconds])
+    return () => clearInterval(intervalRef.current);
+  }, [isRunning, timeLeft, hours, minutes, seconds]);
 
   const handleStart = () => {
-    if (hours === 0 && minutes === 0 && seconds === 0) return
-    setTimeLeft(hours * 3600 + minutes * 60 + seconds)
-    setIsRunning(true)
-  }
+    if (hours === 0 && minutes === 0 && seconds === 0) return;
+    setTimeLeft(hours * 3600 + minutes * 60 + seconds);
+    setIsRunning(true);
+  };
 
   const handleStop = () => {
-    setIsRunning(false)
-    clearInterval(intervalRef.current)
-  }
+    setIsRunning(false);
+    clearInterval(intervalRef.current);
+  };
 
   const handleRestart = () => {
-    setIsRunning(false)
-    setTimeLeft(hours * 3600 + minutes * 60 + seconds)
-  }
+    setIsRunning(false);
+    setTimeLeft(hours * 3600 + minutes * 60 + seconds);
+  };
 
   const handleScroll = (type, value) => {
-    if (type === 'hours') setHours(value)
-    if (type === 'minutes') setMinutes(value)
-    if (type === 'seconds') setSeconds(value)
-  }
+    if (type === 'hours') setHours(value);
+    if (type === 'minutes') setMinutes(value);
+    if (type === 'seconds') setSeconds(value);
+  };
 
   const toggleFullScreen = () => {
     if (!isFullScreen) {
       if (containerRef.current.requestFullscreen) {
-        containerRef.current.requestFullscreen()
+        containerRef.current.requestFullscreen();
       }
-      setIsFullScreen(true)
+      setIsFullScreen(true);
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen()
+        document.exitFullscreen();
       }
-      setIsFullScreen(false)
+      setIsFullScreen(false);
     }
-  }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'f' || e.key === 'F') {
-        toggleFullScreen()
+        toggleFullScreen();
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isFullScreen])
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isFullScreen]);
 
   const formatTime = (time) => {
-    const h = Math.floor(time / 3600)
-    const m = Math.floor((time % 3600) / 60)
-    const s = time % 60
-    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
-  }
+    const h = Math.floor(time / 3600);
+    const m = Math.floor((time % 3600) / 60);
+    const s = time % 60;
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
 
   return (
     <div ref={containerRef} className="flex items-center justify-center min-h-screen bg-transparent p-4">
+    
+    <meta charset="UTF-8" />
+<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A comprehensive timer application built using React, featuring time management tools such as a stopwatch and full-screen timer." />
+<meta name="author" content="Bharat Kadam" />
+<meta name="keywords" content="Clock, React App, Time Zones, Bharat Kadam, World Clock, Indian Time Zone, Full-Screen Timer, Stopwatch, Timer" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="English" />
+<meta property="og:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta property="og:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta property="og:image" content="URL_to_your_app_image" /> */}
+{/* <meta property="og:url" content="https://yourappurl.com" /> */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="World Clock & Timer App: Manage Time Across Time Zones" />
+<meta name="twitter:description" content="Explore time management with our full-featured clock and timer app, including global time zones and stopwatch functionalities." />
+{/* <meta name="twitter:image" content="URL_to_your_app_image" /> */}
+{/* <meta name="canonical" content="https://yourappurl.com" /> */}
+
+   
+      
       <div className="w-full max-w-xs">
         {/* Time Picker - Only show when not running */}
         {!isRunning && (
           <>
             <div className="text-center mb-4 text-3xl text-white font-semibold">
-            <h1 className="text-6xl font-bold text-center mb-4 p-2 "> Timer</h1>
+              <h1 className="text-6xl font-bold text-center mb-4 p-2"> Timer </h1>
             </div>
             <div className="flex justify-center space-x-4 mb-4">
               {['hours', 'minutes', 'seconds'].map((type) => (
@@ -168,5 +190,5 @@ export default function Timer() {
         </div>
       </div>
     </div>
-  )
+  );
 }
