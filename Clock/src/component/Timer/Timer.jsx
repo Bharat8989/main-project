@@ -87,12 +87,14 @@ export default function Timer() {
   }
 
   return (
-    <div ref={containerRef} className="flex items-center justify-center min-h-screen bg-slate-900 p-4">
+    <div ref={containerRef} className="flex items-center justify-center min-h-screen bg-transparent p-4">
       <div className="w-full max-w-xs">
         {/* Time Picker - Only show when not running */}
         {!isRunning && (
           <>
-            <div className="text-center mb-4 text-3xl text-white font-semibold">Set Timer</div>
+            <div className="text-center mb-4 text-3xl text-white font-semibold">
+            <h1 className="text-6xl font-bold text-center mb-4 p-2 "> Timer</h1>
+            </div>
             <div className="flex justify-center space-x-4 mb-4">
               {['hours', 'minutes', 'seconds'].map((type) => (
                 <div 
@@ -127,7 +129,7 @@ export default function Timer() {
         )}
 
         {/* Timer Display */}
-        <div className="text-5xl font-bold text-center mb-6 text-white font-mono">
+        <div className="text-7xl font-bold text-center mb-6 text-white font-mono">
           {formatTime(timeLeft)}
         </div>
 

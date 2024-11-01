@@ -51,14 +51,14 @@ export default function WorldClock() {
   );
 
   return (
-    <div className='p-4 py-12'>
-    <div className="p-6 gap-20 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+    <div className='p-4 py-12 bg-transparent'>
+    <div className="p-6 gap-20 sm:p-6 lg:p-8 text-white min-h-screen">
       <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="text-6xl font-bold text-center mb-4 "> Clock</h1>
         <div className="text-6xl font-mono text-center">
           {dateTime.toLocaleTimeString('en-US')}
         </div>
-        <p className="text-lg text-gray-600 text-center">
+        <p className="text-lg text-gray-300 text-center">
           Current: {dateTime.toLocaleDateString('en-GB')}
         </p>
 
@@ -73,24 +73,25 @@ export default function WorldClock() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white rounded-lg shadow-lg p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+                  className="bg-slate-800 rounded-lg shadow-lg p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
                 >
                   <div className="text-center sm:text-left">
                     <h2 className="text-3xl font-bold">{zoneTime.time}</h2>
-                    <p className="text-gray-600">{zone.label}</p>
+                    <p className="text-gray-300">{zone.label}</p>
                     <p className="text-gray-400 text-sm">
                       {zoneTime.date} | {zone.offset}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-gray-400 w-8 h-8">🕒</span>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded"
-                      onClick={() => removeTimeZone(zone.value)}
-                    >
-                      Remove
-                    </button>
-                  </div>
+  <span className="text-gray-400 w-10 text-2xl">🕒</span> {/* Increased text size */}
+  <button
+    className="bg-red-500 text-white px-4 py-2 rounded"
+    onClick={() => removeTimeZone(zone.value)}
+  >
+    Remove
+  </button>
+</div>
+
                 </motion.div>
               );
             })}
@@ -98,22 +99,23 @@ export default function WorldClock() {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => setIsDialogOpen(true)}
-            className="bg-blue-500 text-white p-3 rounded-full shadow-lg text-2xl flex items-center"
-          >
-            ➕ 
-          </button>
+        <button
+  onClick={() => setIsDialogOpen(true)}
+  className="bg-slate-300 text-white p-2 rounded-full shadow-lg text-2xl flex items-center relative -mt-2"
+>
+  ➕ 
+</button>
+
         </div>
 
         {isDialogOpen && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+          <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center">
+            <div className="bg-slate-600 p-6 rounded-lg shadow-lg w-96">
               <h2 className="text-xl font-bold mb-4">Select a City</h2>
               <input
                 type="text"
                 placeholder="Search city or country"
-                className="w-full p-2 mb-4 border rounded"
+                className="w-full p-3 mb-4 border rounded"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

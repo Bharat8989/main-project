@@ -89,14 +89,11 @@ export default function Stopwatch() {
   return (
     <div
       ref={stopwatchRef}
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-slate-900 to-slate-700 p-4"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r bg-transparent p-4"
     >
-      <h1 className="text-center p-4 font-bold text-4xl md:text-5xl font-sans text-blue-700 shadow-lg shadow-blue-300 rounded-lg border-b-4 border-blue-500 transition-transform duration-300 transform hover:scale-105">
-        Stopwatch
-      </h1>
-
-      <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-8 rounded-lg shadow-2xl max-w-lg md:max-w-2xl w-full mx-auto mt-6">
-        <div className="text-center text-5xl md:text-7xl font-bold text-white mb-8">
+      <h1 className="text-6xl font-bold text-center mb-4 text-white ">Stopwatch</h1>
+      <div className="bg-gradient-to-r bg-transparent  p-8 rounded-lg shadow-2xl max-w-lg md:max-w-2xl w-full mx-auto mt-6">
+        <div className="text-center text-7xl md:text-7xl font-bold text-white mb-8">
           {formatTime(time)}
         </div>
         <div className="flex justify-center space-x-4 mb-6">

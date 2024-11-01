@@ -1,18 +1,46 @@
-import React, { useState } from 'react';
+'use client';
 
-const Alarm = () => {
-  const [alarms, setAlarms] = useState([{ time: "06:28", isOn: true }]);
+import React, { useState, useEffect } from 'react';
+
+export default function Component() {
+  const [alarms, setAlarms] = useState(() => {
+    const savedAlarms = localStorage.getItem('alarms');
+    return savedAlarms ? JSON.parse(savedAlarms) : [{ time: "06:28 AM", isOn: true }];
+  });
   const [showModal, setShowModal] = useState(false);
-  const [newAlarmTime, setNewAlarmTime] = useState("06:00");
+  const [newAlarmTime, setNewAlarmTime] = useState("06:00 AM");
+  const [alarmMessage, setAlarmMessage] = useState('');
 
-  // Function to calculate the time until each alarm
+  useEffect(() => {
+    localStorage.setItem('alarms', JSON.stringify(alarms));
+  }, [alarms]);
+
+  const formatTimeTo12Hour = (time) => {
+    const [hour, minute] = time.split(':').map(Number);
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 || 12;
+    return `${formattedHour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${period}`;
+  };
+
+  const parse12HourTimeTo24Hour = (time) => {
+    const [timePart, period] = time.split(' ');
+    let [hour, minute] = timePart.split(':').map(Number);
+
+    if (period === 'PM' && hour !== 12) {
+      hour += 12;
+    } else if (period === 'AM' && hour === 12) {
+      hour = 0;
+    }
+
+    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+  };
+
   const calculateTimeUntilAlarm = (alarmTime) => {
     const now = new Date();
-    const [alarmHour, alarmMinute] = alarmTime.split(':').map(Number);
+    const [alarmHour, alarmMinute] = parse12HourTimeTo24Hour(alarmTime).split(':').map(Number);
     const alarmDate = new Date(now);
     alarmDate.setHours(alarmHour, alarmMinute, 0, 0);
 
-    // If the alarm time has already passed today, set it for the next day
     if (alarmDate <= now) {
       alarmDate.setDate(alarmDate.getDate() + 1);
     }
@@ -24,16 +52,36 @@ const Alarm = () => {
     return `in ${hours} hours ${minutes} minutes`;
   };
 
-  // Function to add a new alarm
+  useEffect(() => {
+    const checkAlarms = setInterval(() => {
+      const now = new Date();
+      const currentTime = formatTimeTo12Hour(`${now.getHours()}:${now.getMinutes()}`);
+
+      alarms.forEach((alarm, index) => {
+        if (alarm.isOn && alarm.time === currentTime) {
+          setAlarmMessage(`Alarm ringing at ${alarm.time}!`);
+          setAlarms((prevAlarms) =>
+            prevAlarms.map((a, i) => (i === index ? { ...a, isOn: false } : a))
+          );
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(checkAlarms);
+  }, [alarms]);
+
   const handleAddAlarm = () => {
     setAlarms((prevAlarms) => [
       ...prevAlarms,
       { time: newAlarmTime, isOn: true },
     ]);
-    setShowModal(false); // Close the modal after adding the alarm
+    setShowModal(false);
   };
 
-  // Function to toggle alarm on/off
+  const handleRemoveAlarm = (index) => {
+    setAlarms((prevAlarms) => prevAlarms.filter((_, i) => i !== index));
+  };
+
   const toggleAlarm = (index) => {
     setAlarms((prevAlarms) =>
       prevAlarms.map((alarm, i) =>
@@ -43,60 +91,92 @@ const Alarm = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800">
-      <h1 className="text-3xl font-bold mb-6">Alarms</h1>
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white p-7">
+     <h1 className="text-6xl font-bold text-center mb-4 p-8">Alarm</h1>
 
-      <div className="space-y-4">
+      {alarmMessage && (
+        <div className="bg-red-200 border border-red-500 text-red-900 px-4 py-3 rounded mb-4 w-full max-w-md">
+          {alarmMessage}
+        </div>
+      )}
+
+      <div className="w-full max-w-md space-y-4">
         {alarms.map((alarm, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md p-6 flex items-center justify-between w-80">
+          <div
+            key={index}
+            className="bg-gray-700 rounded-lg shadow-lg p-4 sm:p-6 flex items-center justify-between"
+          >
             <div>
-              <h2 className="text-4xl font-semibold">{alarm.time}</h2>
-              <p className="text-gray-500">Alarm {calculateTimeUntilAlarm(alarm.time)}</p>
+              <h2 className="text-xl sm:text-3xl font-semibold">{alarm.time}</h2>
+              <p className="text-sm sm:text-base text-gray-300">
+                Alarm {calculateTimeUntilAlarm(alarm.time)}
+              </p>
             </div>
-            
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                className="toggle-checkbox hidden"
-                checked={alarm.isOn}
-                onChange={() => toggleAlarm(index)}
-              />
-              <div className={`toggle-slot ${alarm.isOn ? 'bg-blue-500' : 'bg-gray-400'} w-14 h-8 flex items-center rounded-full p-1`}>
-                <div className={`toggle-dot ${alarm.isOn ? 'translate-x-6' : 'translate-x-0'} w-6 h-6 bg-white rounded-full shadow-md transform transition`} />
-              </div>
-            </label>
+
+            <div className="flex space-x-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  checked={alarm.isOn}
+                  onChange={() => toggleAlarm(index)}
+                />
+                <div
+                  className={`toggle-slot ${
+                    alarm.isOn ? 'bg-green-500' : 'bg-gray-400'
+                  } w-12 sm:w-14 h-7 sm:h-8 flex items-center rounded-full p-1 cursor-pointer`}
+                >
+                  <div
+                    className={`toggle-dot ${
+                      alarm.isOn ? 'translate-x-5 sm:translate-x-6' : 'translate-x-0'
+                    } w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out`}
+                  />
+                </div>
+              </label>
+              <button
+                onClick={() => handleRemoveAlarm(index)}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
       </div>
-
-      <button
+     <div className='mt-8 flex justify-center'>
+     <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-10 right-10 bg-blue-500 text-white p-4 rounded-full shadow-lg text-2xl"
+        className="bg-slate-300 text-white p-3 rounded-full shadow-lg text-2xl flex items-center"
+        aria-label="Add new alarm"
       >
-        +
+        ➕ 
       </button>
+     </div>
+     
 
-      {/* Modal for selecting a new alarm time */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-80">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
+          <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-sm">
             <h2 className="text-xl font-bold mb-4">Set Alarm Time</h2>
             <input
               type="time"
-              value={newAlarmTime}
-              onChange={(e) => setNewAlarmTime(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
+              value={parse12HourTimeTo24Hour(newAlarmTime)}
+              onChange={(e) => {
+                const time = formatTimeTo12Hour(e.target.value);
+                setNewAlarmTime(time);
+              }}
+              className="w-full p-2 border border-gray-500 rounded mb-4 bg-gray-700 text-white"
             />
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowModal(false)}
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300"
               >
                 Cancel
               </button>
               <button
                 onClick={handleAddAlarm}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors duration-300"
               >
                 Add Alarm
               </button>
@@ -106,6 +186,4 @@ const Alarm = () => {
       )}
     </div>
   );
-};
-
-export default Alarm;
+}
