@@ -5,7 +5,7 @@ const Rules = () => {
     <div className='max-w-3xl mx-auto bg-[#fbf1f1] p-6 mt-10 rounded-lg'>
       <h2 className='text-2xl font-semibold mb-6'>
         How to play dice game
-      </h2>
+      </h2> 
       <div className='space-y-4'>
         <p>Select any number</p>
         <p>Click on dice image</p>
@@ -14,8 +14,10 @@ const Rules = () => {
         </p>
         <p>If you get a wrong guess, then 2 points will be deducted.</p>
       </div>
-    </div>
+    </div> 
+    //
   );
 };  
 
 export default Rules;
+ 
