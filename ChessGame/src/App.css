@@ -8,7 +8,8 @@
     width:90%;
     height:85%;
     flex-wrap: wrap;
-    display:flex;
+    display:flex; 
+    /*  */
 
 }
 .App{
