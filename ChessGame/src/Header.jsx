@@ -1,148 +1,80 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import {  IoMdMenu, IoMdClose } from "react-icons/io";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { useState } from 'react';
 
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Play', href: '/play' },
+  { name: 'Puzzles', href: '/puzzles' },
+  { name: 'Learn', href: '/learn' },
+  { name: 'Login', href: '/login' },
+  { name: 'Sign Up', href: '/signup' },
+];
 
-export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+export default function ResponsiveNavigation() {
+  const location = useLocation();
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
-    const toggleSidebar = () => setIsOpen(!isOpen);
+  return (
+    <div className="flex flex-row h-screen">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex flex-col border-r bg-white w-64 shadow-md">
+        <div className="p-4 text-xl font-bold border-b">MyApp</div>
+        <nav className="flex-grow overflow-y-auto">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              className={`block p-4 text-lg font-medium transition-colors rounded-md ${
+                location.pathname === item.href ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 text-gray-800'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </aside>
 
-    return (
-        <header className="bg-gray-900 text-white fixed w-full z-10 shadow-lg">
-            <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-                {/* Logo */}
-                <div className="text-lg font-bold">MyApp</div>
-
-                {/* Desktop Navbar */}
-                <div className="hidden md:flex items-center space-x-8">
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) => 
-                            `flex items-center space-x-2 text-lg font-semibold transition ${
-                            isActive ? 'text-blue-500' : 'hover:text-blue-400'
-                        }`}
-                    >
-                        
-                        <span>Play</span>
-                    </NavLink>
-                    <NavLink
-                        to="/clock"
-                        className={({ isActive }) => 
-                            `flex items-center space-x-2 text-lg font-semibold transition ${
-                            isActive ? 'text-blue-500' : 'hover:text-blue-400'
-                        }`}
-                    >
-                        
-                        <span>Clock</span>
-                    </NavLink>
-                    <NavLink
-                        to="/stopwatch"
-                        className={({ isActive }) => 
-                            `flex items-center space-x-2 text-lg font-semibold transition ${
-                            isActive ? 'text-blue-500' : 'hover:text-blue-400'
-                        }`}
-                    >
-                        
-                        <span>Stopwatch</span>
-                    </NavLink>
-                    <NavLink
-                        to="/timer"
-                        className={({ isActive }) => 
-                            `flex items-center space-x-2 text-lg font-semibold transition ${
-                            isActive ? 'text-blue-500' : 'hover:text-blue-400'
-                        }`}
-                    >
-                       
-                        <span>Timer</span>
-                    </NavLink>
-                    <NavLink
-                        to="/login"
-                        className="text-lg font-semibold hover:text-blue-400"
-                    >
-                        Login
-                    </NavLink>
-                    <NavLink
-                        to="/signup"
-                        className="text-lg font-semibold text-blue-500"
-                    >
-                        Sign Up
-                    </NavLink>
-                </div>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-white"
-                    onClick={toggleSidebar}
-                    aria-label="Toggle Menu"
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 bg-white border-b shadow-md z-50">
+        <div className="flex items-center justify-between p-4">
+          <div className="text-xl font-bold">MyApp</div>
+          <button onClick={() => setMenuOpen(!isMenuOpen)} aria-label="Open Menu">
+            {isMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+          </button>
+        </div>
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-80 z-40">
+            <div className="flex justify-between p-4 bg-gray-900 border-b">
+              <div className="text-xl font-bold text-white">Menu</div>
+              <button onClick={() => setMenuOpen(false)} aria-label="Close Menu">
+                <FaTimes className="h-6 w-6 text-white" />
+              </button>
+            </div>
+            <nav className="p-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`block px-4 py-3 text-lg font-medium text-white transition-colors ${
+                    location.pathname === item.href ? 'bg-blue-500' : 'hover:bg-gray-700'
+                  }`}
+                  onClick={() => setMenuOpen(false)}
                 >
-                    {isOpen ? <IoMdClose size={24} /> : <IoMdMenu size={24} />}
-                </button>
+                  {item.name}
+                </Link>
+              ))}
             </nav>
+          </div>
+        )}
+      </header>
 
-            {/* Sidebar for Mobile */}
-            {isOpen && (
-                <div className="fixed inset-0 bg-gray-900 bg-opacity-95 z-20">
-                    <div className="flex flex-col h-full w-full">
-                        <button 
-                            className="p-4 text-white flex items-center justify-between"
-                            onClick={toggleSidebar}
-                            aria-label="Close Menu"
-                        >
-                            <span className="text-lg font-bold">Menu</span>
-                            <IoMdClose size={24} />
-                        </button>
-                        <div className="flex flex-col items-center">
-                            <NavLink
-                                to="/"
-                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-2"
-                                onClick={toggleSidebar}
-                            >
-                                
-                                <span className="ml-2">Play</span>
-                            </NavLink>
-                            <NavLink
-                                to="/clock"
-                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-1"
-                                onClick={toggleSidebar}
-                            >
-                               
-                                <span className="ml-2">Clock</span>
-                            </NavLink>
-                            <NavLink
-                                to="/stopwatch"
-                                className="flex items-center w-full p-4 hover:bg-gray-700"
-                                onClick={toggleSidebar}
-                            >
-                               
-                                <span className="ml-2">Stopwatch</span>
-                            </NavLink>
-                            <NavLink
-                                to="/timer"
-                                className="flex items-center w-full p-4 hover:bg-gray-700"
-                                onClick={toggleSidebar}
-                            >
-                                
-                                <span className="ml-2">Timer</span>
-                            </NavLink>
-                            <NavLink
-                                to="/login"
-                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-3"
-                                onClick={toggleSidebar}
-                            >
-                                Login
-                            </NavLink>
-                            <NavLink
-                                to="/signup"
-                                className="flex items-center w-full p-4 text-blue-500 hover:bg-gray-700 ml-3"
-                                onClick={toggleSidebar}
-                            >
-                                Sign Up
-                            </NavLink>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </header>
-    );
+      {/* Main Content Area */}
+      <main className="flex-grow p-4 lg:p-8 overflow-auto">
+        <h1 className="text-2xl font-bold mb-4">Welcome to MyApp</h1>
+        <p>This is where your main content would go.</p>
+      </main>
+    </div>
+  );
 }
