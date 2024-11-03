@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { IoIosAlarm, IoMdMenu, IoMdClose } from "react-icons/io";
-import { FaClock, FaStopwatch } from "react-icons/fa";
-import { GiSandsOfTime } from "react-icons/gi";
+import {  IoMdMenu, IoMdClose } from "react-icons/io";
+
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +23,7 @@ export default function Header() {
                             isActive ? 'text-blue-500' : 'hover:text-blue-400'
                         }`}
                     >
-                        <IoIosAlarm />
+                        
                         <span>Play</span>
                     </NavLink>
                     <NavLink
@@ -34,7 +33,7 @@ export default function Header() {
                             isActive ? 'text-blue-500' : 'hover:text-blue-400'
                         }`}
                     >
-                        <FaClock />
+                        
                         <span>Clock</span>
                     </NavLink>
                     <NavLink
@@ -44,7 +43,7 @@ export default function Header() {
                             isActive ? 'text-blue-500' : 'hover:text-blue-400'
                         }`}
                     >
-                        <FaStopwatch />
+                        
                         <span>Stopwatch</span>
                     </NavLink>
                     <NavLink
@@ -54,7 +53,7 @@ export default function Header() {
                             isActive ? 'text-blue-500' : 'hover:text-blue-400'
                         }`}
                     >
-                        <GiSandsOfTime />
+                       
                         <span>Timer</span>
                     </NavLink>
                     <NavLink
@@ -83,62 +82,64 @@ export default function Header() {
 
             {/* Sidebar for Mobile */}
             {isOpen && (
-                <div className="md:hidden fixed inset-0 bg-gray-800 bg-opacity-75 z-20">
-                    <div className="flex flex-col bg-gray-900 w-64 h-full">
+                <div className="fixed inset-0 bg-gray-900 bg-opacity-95 z-20">
+                    <div className="flex flex-col h-full w-full">
                         <button 
-                            className="p-4 text-white flex items-center" 
+                            className="p-4 text-white flex items-center justify-between"
                             onClick={toggleSidebar}
                             aria-label="Close Menu"
                         >
+                            <span className="text-lg font-bold">Menu</span>
                             <IoMdClose size={24} />
-                            <span className="ml-2">Close</span>
                         </button>
-                        <NavLink
-                            to="/"
-                            className="flex items-center p-4 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            <IoIosAlarm />
-                            <span className="ml-2">Play</span>
-                        </NavLink>
-                        <NavLink
-                            to="/clock"
-                            className="flex items-center p-4 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            <FaClock />
-                            <span className="ml-2">Clock</span>
-                        </NavLink>
-                        <NavLink
-                            to="/stopwatch"
-                            className="flex items-center p-4 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            <FaStopwatch />
-                            <span className="ml-2">Stopwatch</span>
-                        </NavLink>
-                        <NavLink
-                            to="/timer"
-                            className="flex items-center p-4 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            <GiSandsOfTime />
-                            <span className="ml-2">Timer</span>
-                        </NavLink>
-                        <NavLink
-                            to="/login"
-                            className="flex items-center p-4 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            Login
-                        </NavLink>
-                        <NavLink
-                            to="/signup"
-                            className="flex items-center p-4 text-blue-500 hover:bg-gray-700"
-                            onClick={toggleSidebar}
-                        >
-                            Sign Up
-                        </NavLink>
+                        <div className="flex flex-col items-center">
+                            <NavLink
+                                to="/"
+                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-2"
+                                onClick={toggleSidebar}
+                            >
+                                
+                                <span className="ml-2">Play</span>
+                            </NavLink>
+                            <NavLink
+                                to="/clock"
+                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-1"
+                                onClick={toggleSidebar}
+                            >
+                               
+                                <span className="ml-2">Clock</span>
+                            </NavLink>
+                            <NavLink
+                                to="/stopwatch"
+                                className="flex items-center w-full p-4 hover:bg-gray-700"
+                                onClick={toggleSidebar}
+                            >
+                               
+                                <span className="ml-2">Stopwatch</span>
+                            </NavLink>
+                            <NavLink
+                                to="/timer"
+                                className="flex items-center w-full p-4 hover:bg-gray-700"
+                                onClick={toggleSidebar}
+                            >
+                                
+                                <span className="ml-2">Timer</span>
+                            </NavLink>
+                            <NavLink
+                                to="/login"
+                                className="flex items-center w-full p-4 hover:bg-gray-700 ml-3"
+                                onClick={toggleSidebar}
+                            >
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/signup"
+                                className="flex items-center w-full p-4 text-blue-500 hover:bg-gray-700 ml-3"
+                                onClick={toggleSidebar}
+                            >
+                                Sign Up
+                            </NavLink>
+                        </div>
                     </div>
                 </div>
             )}
