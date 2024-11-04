@@ -1,6 +1,6 @@
 console.log("Hello via Bun!");
 
-console.log("hello world");
+// console.log("hello world");
 
 const square={
     area: (a) =>(a*a),
@@ -11,4 +11,4 @@ const calsquare=(a)=>{
     console.log(`the value of a is ${a} and the area is `+square.perimeter(a));
     
 }
-calsquare(5);
+calsquare(5); 
