@@ -12,3 +12,5 @@ const server=http.createServer(function(req,res){
     res.end("hello pavan!");
 })
 server.listen(3000);
+
+console.log("hello world");
