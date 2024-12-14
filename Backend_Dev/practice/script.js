@@ -19,10 +19,15 @@
 //     else console.log("Done ");
 // })
 
-const http=require('http');
-const server =http.createServer(function(req,res){
-    res.end("hello world");
+// const http=require('http');
+// const server =http.createServer(function(req,res){
+//     res.end("hello world");
 
+// })
+// server.listen(3000);
+
+const http=require("http");
+const server=http.createServer(function(req,res){
+    res.end("hello world");
 })
 server.listen(3000);
-
