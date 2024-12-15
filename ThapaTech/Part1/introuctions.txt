@@ -1,0 +1,11 @@
+open source server-side java Scrip runtime.
+cross Platform 
+run on multiple operating system
+support Platform windows macOS Linux
+with node.js
+File system
+Network (handle HTTP request)
+Database (like MongoDB or MySQL)
+it is language or a framework
+-->not a programming language or a framework,
+but rather a javascript runtime environment than allow developers to run JavaScript outside of a browser.

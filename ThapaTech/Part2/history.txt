@@ -1,0 +1,8 @@
+some famous npm packages
+--> Express.js :a popular framework for building web applications and APIs.
+
+-->Mongoose: 
+-->Axios: promise based HTTP client for making API requests.
+-->React (and react-dom)
+-->Socket.IO
+-->Passport.js :authentications middleware for node.js
