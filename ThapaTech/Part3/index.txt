@@ -1,0 +1,5 @@
+A Brief History of Node.js
+2009: Node.js was created by Ryan Dahl.
+JavaScript was initially limited to browsers. Dahl leveraged the Chrome V8 engine to enable JavaScript to run on the server-side.
+Objective: Build a fast, non-blocking server environment.
+Today, Node.js is widely used for web apps, APIs, and real-time applications.
