@@ -1,0 +1,20 @@
+global object 
+globalThis
+-->1 Browser:window
+2 Node.js:global
+3 Web Workers:self
+4 other Environment:Might have their own global object
+
+
+imp 
+React -->components
+Node--> module.
+
+
+built in module in nodeJS
+
+OS--> provides information about the operating system 
+PATH-->provides utility functions for working with file paths
+FS--> files system operating like reading and writing files 
+HTTP -->create HTTP servers
+
