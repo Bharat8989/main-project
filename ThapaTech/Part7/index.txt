@@ -1,0 +1,7 @@
+Module 
+self-contained code unit 
+-Encapsulations 
+-->node.js use the common JS module system (module.exports and require )
+-->this makes your code module,  maintainable and easier to debug.
+
+
