@@ -10,17 +10,31 @@
 //   res.send('Hello World')
 // })
 
-const express=require('express');
+// const express=require('express');
+// const app=express();
+
+
+// app.get('/',function(req,res){
+//     res.send('hello ,suraj and manisha ');
+// })
+
+// app.get('/Hello',function(req,res){
+//     res.send('hello ,Pavan and Pooja');
+// });
+
+
+
+
+const express=require('express')
 const app=express();
-
-
 app.get('/',function(req,res){
-    res.send('hello ,suraj and manisha ');
-})
-
-app.get('/Hello',function(req,res){
-    res.send('hello ,Pavan and Pooja');
+    res.send('what is your name');
 });
+app.get('/photo',function(req,res){
+    res.send("my name is Pavan");
+});
+app.listen(3000);
 
 
-app.listen(3000)
+
+
