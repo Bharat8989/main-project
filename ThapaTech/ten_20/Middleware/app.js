@@ -1,48 +1,36 @@
-// const http=require('http');
-// const server=http.createServer(function(req,res){
-//     res.end('hello world');
-// })
-// server.listen(3000);
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// routing 
-
-// const express=require('express')
-// const app=express();
-// app.get('/',function(req,res){
-//     res.send('what is your name');
-// });
-// app.get('/name',function(req,res){
-//     res.send("my name is Pavan");
-// });
-// app.listen(3000);
-
-
-const express = require('express');
 const app = express();
 
+// To simulate __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Setting the view engine
 app.set('view engine', 'ejs');
 
-
+// Routes
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Home Page', message: 'Welcome to EJS!' });
+    res.render('index'); // Render the EJS template `index.ejs`
 });
 
+// Dynamic routing
+app.get('/profile/:username', (req, res) => {
+    res.send(`Welcome, ${req.params.username}`);
+});
 
+app.get('/profile/:username/:age', (req, res) => {
+    res.send(`Welcome, ${req.params.username} of age ${req.params.age}`);
+});
+
+// Starting the server
 app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+    console.log("Server is running on http://localhost:3000");
 });
-
-
-
-
-
-// console.log(__filename)
-// const express=require('express')
-// const app=express();
-// const path=require('path');
-
-// app.use(express.json());
-// app.use((express.urlencoded({extended:true})));
-// app.use(express.static(path.join(__dirname,'public')));
-
