@@ -1,6 +1,6 @@
 const express = require('express');
-const path = require('path'); // Import the 'path' module
-const fs = require('fs'); // Import the 'fs' module
+const path = require('path');
+const fs = require('fs');
 const app = express();
 
 // Set EJS as the view engine
@@ -13,31 +13,41 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define routes
-app.get('/', function (req, res) {
-    // Read all files from the 'files' directory
-    fs.readdir('./files', function (err, files) {
+// Home route: Render the task list
+app.get('/', (req, res) => {
+    fs.readdir('./files', (err, files) => {
         if (err) {
             console.error(err);
-            res.render('index', { files: [] }); // Render with an empty array in case of error
-        } else {
-            res.render('index', { files }); // Pass the file names to the template
-        }
+            return res.render('index', { files: [] });
+        } 
+        res.render('index', { files });
     });
 });
 
-app.post('/create', function (req, res) {
-    // Ensure task title and details are provided
-    const title = req.body.title || 'Untitled';
-    const details = req.body.details || '';
-
-    // Create the file with a sanitized title (remove spaces and join)
-    const filename = `${title.split(' ').join('')}.txt`;
-    fs.writeFile(`./files/${filename}`, details, function (err) {
+// View task details
+app.get('/files/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'files', req.params.filename);
+    fs.readFile(filePath, 'utf-8', (err, fileData) => {
         if (err) {
             console.error(err);
+            return res.status(404).send('Task not found');
         }
-        res.redirect('/'); // Redirect to the home page after file creation
+        res.render('show', { title: req.params.filename.replace('.txt', ''), content: fileData });
+    });
+});
+
+// Create a new task
+app.post('/create', (req, res) => {
+    const title = req.body.title || 'Untitled';
+    const details = req.body.details || '';
+    const filename = `${title.split(' ').join('')}.txt`;
+
+    fs.writeFile(path.join(__dirname, 'files', filename), details, (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error creating task');
+        }
+        res.redirect('/');
     });
 });
 
