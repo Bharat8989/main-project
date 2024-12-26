@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-center mb-8">All Users</h1>
+        <div class="users grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- User Card -->
+            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-2">Bharat Kadam</h3>
+                <h5 class="text-zinc-400 mb-4">kadamb34@gmail.com</h5>
+                <div class="flex gap-4">
+                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
+                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+                </div>
+            </div>
+            <!-- Repeat User Cards -->
+            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-2">John Doe</h3>
+                <h5 class="text-zinc-400 mb-4">john.doe@example.com</h5>
+                <div class="flex gap-4">
+                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
+                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+                </div>
+            </div>
+            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-2">Jane Smith</h3>
+                <h5 class="text-zinc-400 mb-4">jane.smith@example.com</h5>
+                <div class="flex gap-4">
+                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
+                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+                </div>
+            </div>
+            <!-- Add more cards as needed -->
+        </div>
+    </div>
+</body>
+</html>
