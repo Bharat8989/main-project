@@ -1,43 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Users</title>
+    <title>User List</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div class="container mx-auto py-10 px-4">
-        <h1 class="text-3xl font-bold text-center mb-8">All Users</h1>
-        <div class="users grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<body class="bg-zinc-900 text-white">
+
+    <div class="container mx-auto p-10">
+        <div class="nav mb-10">
+            <a href="/" class="text-blue-500">Back to Home</a>
+        </div>
+        <h1 class="text-4xl font-bold tracking-tight mb-8 text-center">All Users</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- User Card -->
-            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <h3 class="text-2xl font-semibold mb-2">Bharat Kadam</h3>
-                <h5 class="text-zinc-400 mb-4">kadamb34@gmail.com</h5>
-                <div class="flex gap-4">
-                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
-                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+            <div class="user-card max-w-sm mx-auto p-6 bg-zinc-800  shadow-md">
+                <div class="avatar w-20 h-20 bg-red-500  mx-auto mb-4"></div>
+                <h3 class="text-xl font-semibold text-center">Bharat Kadam</h3>
+                <p class="text-center text-zinc-500">kadam34@gmail.com</p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <a href="#" class="text-blue-500 hover:underline">Edit user</a>
+                    <a href="#" class="text-red-600 hover:underline">Delete user</a>
                 </div>
             </div>
-            <!-- Repeat User Cards -->
-            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <h3 class="text-2xl font-semibold mb-2">John Doe</h3>
-                <h5 class="text-zinc-400 mb-4">john.doe@example.com</h5>
-                <div class="flex gap-4">
-                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
-                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+
+            <!-- Duplicate for more users -->
+            <div class="user-card max-w-sm mx-auto p-6 bg-zinc-800 rounded-lg shadow-md">
+                <div class="avatar w-20 h-20 bg-red-500 rounded-full mx-auto mb-4"></div>
+                <h3 class="text-xl font-semibold text-center">Bharat Kadam</h3>
+                <p class="text-center text-zinc-500">kadam34@gmail.com</p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <a href="#" class="text-blue-500 hover:underline">Edit user</a>
+                    <a href="#" class="text-red-600 hover:underline">Delete user</a>
                 </div>
             </div>
-            <div class="user bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <h3 class="text-2xl font-semibold mb-2">Jane Smith</h3>
-                <h5 class="text-zinc-400 mb-4">jane.smith@example.com</h5>
-                <div class="flex gap-4">
-                    <a href="#" class="text-indigo-400 hover:underline">Edit User</a>
-                    <a href="#" class="text-red-500 hover:underline">Delete User</a>
+
+            <div class="user-card max-w-sm mx-auto p-6 bg-zinc-800 rounded-lg shadow-md">
+                <div class="avatar w-20 h-20 bg-red-500 rounded-full mx-auto mb-4"></div>
+                <h3 class="text-xl font-semibold text-center">Bharat Kadam</h3>
+                <p class="text-center text-zinc-500">kadam34@gmail.com</p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <a href="#" class="text-blue-500 hover:underline">Edit user</a>
+                    <a href="#" class="text-red-600 hover:underline">Delete user</a>
                 </div>
             </div>
-            <!-- Add more cards as needed -->
         </div>
     </div>
 </body>
+
 </html>
