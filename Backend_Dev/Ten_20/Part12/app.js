@@ -17,8 +17,8 @@ mongoose
 app.set('view engine', 'ejs');
 
 // Middleware
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,11 +37,40 @@ app.get('/read', async (req, res) => {
   }
 });
 
-app.post('/create', async (req, res) => {
-  const { name, email, image } = req.body;
+app.get('/edit/:id', async (req, res) => {
   try {
-    const createUser = await userModel.create({ name, email, image });
-    res.redirect('/read'); // Redirect to '/read' after user creation
+    const user = await userModel.findById(req.params.id);
+    if (!user) return res.status(404).send("User not found");
+    res.render('edit', { user });
+  } catch (err) {
+    res.status(500).send("Error fetching user");
+  }
+});
+
+app.post('/update/:id', async (req, res) => {
+  try {
+    const { name, email, image } = req.body;
+    await userModel.findByIdAndUpdate(req.params.id, { name, email, image });
+    res.redirect('/read');
+  } catch (err) {
+    res.status(500).send("Error updating user");
+  }
+});
+
+app.get('/delete/:id', async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.params.id);
+    res.redirect('/read');
+  } catch (err) {
+    res.status(500).send("Error deleting user");
+  }
+});
+
+app.post('/create', async (req, res) => {
+  try {
+    const { name, email, image } = req.body;
+    await userModel.create({ name, email, image });
+    res.redirect('/read');
   } catch (err) {
     res.status(500).send("Error creating user");
   }
