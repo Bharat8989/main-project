@@ -1,33 +1,21 @@
-// const fs= require('fs');
+var http=require('http');
+const fs=require('fs')
 
-// // write files 
-
-// fs.writeFile('hey.tex','hello , how can i help you',function(err){
-//     if(err) console.error(err);
-//         else console.log("done ");
-// });
-// // appendFiles
-
-// fs.appendFile('hey.tex', ' do you no',function(err){
-//     if(err) console.error(err);
-//         else console.log("append files");
-// })
-
-// // rename 
-// fs.rename('hey.tex','hello.txt',function(err){
-//     if(err) console.error(err);
-//     else console.log("Done ");
-// })
-
-// const http=require('http');
-// const server =http.createServer(function(req,res){
-//     res.end("hello world");
-
-// })
-// server.listen(3000);
-
-const http=require("http");
-const server=http.createServer(function(req,res){
-    res.end("hello world");
+//asynchronous read
+fs.readFile('hello.txt', 'utf-8',(err,data)=>{
+    if(err) throw err;
+    console.log('file content:',data)
 })
-server.listen(3000);
+
+const data=fs.readFileSync('hello1.txt','utf-8');
+console.log('file content1:',data);
+
+
+// http.createServer(function(req,res){
+//     res.write('hello')
+//     res.end()
+
+
+
+
+// }).listen(3000)
