@@ -1,21 +1,29 @@
-var http=require('http');
-const fs=require('fs')
+const nodemailer = require('nodemailer');
 
-//asynchronous read
-fs.readFile('hello.txt', 'utf-8',(err,data)=>{
-    if(err) throw err;
-    console.log('file content:',data)
-})
+// Create a transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'showman96m@gmail.com',
+    pass: 'BNkadam@1297' // Use an app password if 2FA is enabled
+  }
+});
 
-const data=fs.readFileSync('hello1.txt','utf-8');
-console.log('file content1:',data);
+// Email options
+const mailOptions = {
+  from: 'showman96m@gmail.com',
+  to: 'kadamb208@gmail.com',
+  
+  subject: 'Hello from Node.js',
+  text: 'This is a test email sent using Node.js and Nodemailer.',
+  html: '<h1>Hello</h1><p>This is a test email sent using Node.js.</p>'
+};
 
-
-// http.createServer(function(req,res){
-//     res.write('hello')
-//     res.end()
-
-
-
-
-// }).listen(3000)
+// Send email
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    console.log('Error occurred:', error.message);
+  } else {
+    console.log('Email sent successfully:', info.response);
+  }
+});
