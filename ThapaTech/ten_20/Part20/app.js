@@ -1,5 +1,6 @@
 import readline from 'readline'; // Removed unused `read` import
 
+// const readline=require('readline')
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
