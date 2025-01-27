@@ -1,41 +1,53 @@
+// Import required modules
+const express = require("express");
+const multerconfig = require("./config/multerconfig"); // Assuming this contains your Multer configurations
+const Image = require("./models/image"); // Importing Mongoose model for image handling
+const app = express();
 
-const express=require("express")
-const multer=require('multer')
-const app=express();
-const crypto=require('crypto')
-const path=require('path')
+app.set("view engine", "ejs"); // Setting EJS as the templating engine
+app.use(express.json());
 
-app.set('view engine','ejs')
-app.use(express.json())
-// app.use(express.urlencoded({extended:true}))
+// Serve static files (useful for serving uploaded images)
+app.use(express.static("public"));
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/uploads')
-    },
-    filename: function (req, file, cb) {
-    //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      crypto.randomBytes(6,function(err,bytes){
-        const fn=bytes.toString('hex') + path.extname(file.originalname)
-        cb(null, fn)
-      })
-      
+// Home route to render the upload page
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
+// Profile route to render the profile page and display the uploaded image
+app.get("/profile", async (req, res) => {
+  try {
+    // Fetch the latest uploaded image from the database
+    const userImage = await Image.findOne().sort({ _id: -1 }); // Fetch the last uploaded image
+    const profilePic = userImage ? `/uploads/${userImage.profilepic}` : "/default.png"; // Fallback to default
+    res.render("profile", { profilePic });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading profile.");
+  }
+});
+
+// Upload route to handle file uploads
+app.post("/upload", multerconfig.single("image"), async (req, res) => {
+  try {
+    // Check if the uploaded file exists
+    if (!req.file) {
+      return res.status(400).send("No file uploaded.");
     }
-  })
-  
-  const upload = multer({ storage: storage })
 
-app.get('/',(req,res)=>{
-    res.render('index')
+    // Save the uploaded file's path to MongoDB
+    const newImage = new Image({ profilepic: req.file.filename });
+    await newImage.save();
 
-});
-app.post('/upload', upload.single('image'),(req,res)=>{
-    // res.render('')
-    console.log(req.file);
-
+    res.redirect("/profile"); // Redirect to profile after upload
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while uploading the file.");
+  }
 });
 
-app.listen(3000,()=>{
-    console.log("sever is running on http://localhost:3000/")
-})
-
+// Start the server
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000/");
+});
