@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Files</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Upload Your Files</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data" autocomplete="off" class="space-y-4">
+      <div>
+        <label class="block text-gray-700 font-medium mb-2" for="file">Select File</label>
+        <input 
+          type="file" 
+          id="file" 
+          name="image" 
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+          required>
+      </div>
+      <div>
+        <input 
+          type="submit" 
+          value="Upload File" 
+          class="w-full bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer transition duration-200">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
