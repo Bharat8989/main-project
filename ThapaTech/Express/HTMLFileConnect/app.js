@@ -25,6 +25,12 @@ app.get('/profile/:username',(req,res)=>{
   console.log(req.params)
 })
 
+app.get('/product',(req,res)=>{
+  console.log(req.query )
+  res.send(`<h>product ${req.query.search} </h>`)
+  // console.log(req.query )
+})
+
 
 app.get('/profile/:username/article/:slug',(req,res)=>{
   res.send(`<h1>my user name  :${req.params.username} and article by ${req.params.slug}</h>`)
