@@ -6,9 +6,13 @@ const router = express.Router();
 
 
 // console.log(students);
-
+ 
 // Home Route (renders EJS view)
+
 router.get("/", (req, res) => {
+    res.render("index")
+});
+router.get("/reportCard", (req, res) => {
     const students = [
         {
             name: "Aarav Sharma",
@@ -24,11 +28,12 @@ router.get("/", (req, res) => {
             name: "Rohan Deshmukh",
             class: "11th",
             favoriteSubject: "Computer Science"
-        } 
+        }  
     ];
     
     // res.render("index", {students})
-  return res.render("index", { students })
+    // console.log(students)
+  return res.render("report", { students })
  });
 
 
