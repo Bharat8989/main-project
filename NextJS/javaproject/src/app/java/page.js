@@ -1,7 +1,7 @@
 "use client"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-import SidebarJava from "@/components/SidebarJava"
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer"
+import SidebarJava from "../../components/SidebarJava"
 
 const JavaPage = () => {
   return (

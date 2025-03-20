@@ -1,7 +1,8 @@
 "use client"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-import SidebarJava from "@/components/SidebarJava"
+"use client"
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer"
+import SidebarJava from "../../components/SidebarJava"
 
 const InstallationSetupPage = () => {
   return (

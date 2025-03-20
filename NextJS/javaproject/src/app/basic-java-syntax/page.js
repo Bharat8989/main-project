@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react"; // ✅ Import useState
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SidebarJava from "@/components/SidebarJava";
+// "use client"
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer"
+import SidebarJava from "../../components/SidebarJava"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Clipboard } from "lucide-react"; // ✅ Copy icon
