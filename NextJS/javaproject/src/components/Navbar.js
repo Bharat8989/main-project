@@ -33,6 +33,7 @@ function Navbar() {
     { name: "Foundation Courses", link: "/foundation-courses" },
     { name: "Data Science", link: "/data-science" },
     { name: "Practice Problem", link: "/practice-problem" },
+    { name: "login", link: "/login" },
   ]
 
   const uniqueMenuItems = Array.from(new Map(menuItems.map((item) => [item.name, item])).values())
