@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { FaSearch, FaMoon, FaSun, FaBell, FaBars, FaTimes } from "react-icons/fa"
-import { useAuth, SignOutButton } from "@clerk/nextjs"
+import { useAuth, useUser, SignOutButton } from "@clerk/nextjs"
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const { isSignedIn } = useAuth()
+  const { user } = useUser() // Fetch the user's data
 
   // Toggle dark mode and persist in localStorage
   useEffect(() => {
@@ -39,7 +40,6 @@ function Navbar() {
 
   const uniqueMenuItems = Array.from(new Map(menuItems.map((item) => [item.name, item])).values())
 
-  // Explicit toggle function for clarity
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prevState) => !prevState)
   }
@@ -88,7 +88,7 @@ function Navbar() {
                 href="/dashboard"
                 className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
               >
-                Dashboard
+                {user?.firstName || "User"}
               </Link>
             ) : (
               <Link
@@ -137,4 +137,3 @@ function Navbar() {
 }
 
 export default Navbar
-
