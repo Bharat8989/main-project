@@ -84,12 +84,13 @@ function Navbar() {
             </button>
 
             {isSignedIn ? (
-              <Link
-                href="/dashboard"
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
-              >
-                {user?.firstName || "User"}
-              </Link>
+             <Link
+             href="/dashboard"
+             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+           >
+             {user?.firstName?.trim() ? user.firstName : "User"}
+           </Link>
+           
             ) : (
               <Link
                 href="/login"
