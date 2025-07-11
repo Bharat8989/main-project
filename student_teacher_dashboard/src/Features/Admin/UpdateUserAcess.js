@@ -39,7 +39,7 @@ const ValidationSchema = yup.object({
   classAssigned: yup.array().required('Select Accessible classes'),
   role: yup.string().required('Please enter the role of the user'),
   dashboardAccess: yup.boolean().required('Select the status of the user'),
-});
+}); 
 
 export const UpdateUserAccess = ({ data }) => {
   // Mutation hook for handling update of users

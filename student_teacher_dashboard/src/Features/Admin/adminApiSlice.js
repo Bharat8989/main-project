@@ -6,7 +6,7 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       query: () => `dashboard/admin/users`,
       providesTags: ['users'],
       invalidatesTags: ['users'],
-    }),
+    }), 
 
     updateUser: builder.mutation({
       query: (data) => ({
@@ -58,6 +58,7 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['staffdata'],
     }),
+    
 
     deleteStaffData: builder.mutation({
       query: ({ classId, id, data }) => ({
@@ -83,3 +84,4 @@ export const {
   useUpdateStaffDataMutation,
   useDeleteStaffDataMutation,
 } = adminApiSlice;
+

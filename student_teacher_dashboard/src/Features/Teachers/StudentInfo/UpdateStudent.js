@@ -187,4 +187,4 @@ export const UpdateStudent = ({ data, id }) => {
       )}
     </CardWrapper>
   );
-};
+}; 

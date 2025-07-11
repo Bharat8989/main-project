@@ -173,7 +173,7 @@ export const UsersData = () => {
   // Render the staff container if data is successfully fetched
   else if (isSuccess) {
     content = (
-      <CardWrapper title='User Access Control'>
+      <CardWrapper title='Access Control'>
         <Box sx={{ height: '100%', width: '100%', marginTop: '20px' }}>
           <ToastContainer />
           <DataGrid
@@ -193,7 +193,7 @@ export const UsersData = () => {
               <UpdateUserAccess data={editedItem} />
             </DialogContent>
           </Dialog>
-        </Box>
+        </Box> 
       </CardWrapper>
     );
     // Show error message if there's an error fetching data
