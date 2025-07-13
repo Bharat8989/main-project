@@ -2,11 +2,14 @@
 import { useState } from "react";
 import RestaurantLogin from "../_components/restaurantLogin";
 import RestaurantSignUp from "../_components/restaurantSingUp";
+import RestaurantHeader from "../_components/restaurantHeader";
+
 
 const Restaurant= ()=>{
     const [login,setLogin]=useState(true)
     return (
       <>
+     <RestaurantHeader/>
         <h1>Restaurant login / SignUp Page</h1>
         {login ? <RestaurantLogin /> : <RestaurantSignUp />}
         {/* <RestaurantLogin />
