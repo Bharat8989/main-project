@@ -6,7 +6,7 @@ const RestaurantHeader = () => {
         <image
           src="https://resto.000webhostapp.com/img/logo.png"
           alt="logo"
-          width="100px"
+          width="10 0px"
         ></image>
       </div>
       <ul>
