@@ -1,20 +1,18 @@
+const express = require('express');
+const app=express();
 
-
-const http = require("http");
-
-const server = http.createServer((req, res) => {
-    console.log(req.url)
-  if (req.url === "/") {
-    res.end("Home Page");
-  } 
-  else if (req.url === "/about") {
-    res.end("About Page");
-  } 
-  else {
-    res.end("404 Page Not Found");
-  }
+app.set('view engine', 'ejs');  
+app.get('/', (req, res) => {    
+    res.render('index');
 });
 
-server.listen(3000, () => {
-  console.log("server is listening on port 3000");
+app.get('/about', (req, res) => {    
+    res.send('about'); 
 });
+app.get('/profile', (req, res) => {
+  res.send('This is the profile page');
+});
+
+app.listen(3000, () => {    
+    console.log('Server is running on port 3000');
+} );
