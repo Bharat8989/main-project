@@ -5,6 +5,9 @@ require('dotenv').config();
 const express = require('express');
 const userRoutes = require('./routes/user.routes');
 const connectDB = require('./config/db');
+const cookieParser=require('cookie-parser');
+
+const indexRoutes=require('./routes/index.routes'); 
 
 // 3️⃣ CONNECT DATABASE
 connectDB();
@@ -13,15 +16,17 @@ const app = express();
 
 // 4️⃣ MIDDLEWARES
 app.set('view engine', 'ejs');
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // parse form data
 app.use(express.json());
 
 // 5️⃣ ROUTES
+app.use('/', indexRoutes);
 app.use('/user', userRoutes);
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// app.get('/', (req, res) => {
+//   res.render('index');
+// });
 
 // 6️⃣ SERVER
 app.listen(3000, () => {

@@ -4,20 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Page</title>
-
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Flowbite -->
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-  
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
   <form action="/user/register" method="POST" class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
     
-    <!-- First Name -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Create Account</h1>
+
+    <!-- Username -->
     <div class="mb-5">
       <label for="Username" class="block mb-2 text-sm font-medium text-gray-700">
         Username
@@ -25,7 +21,7 @@
       <input
         type="text"
         id="Username"
-        placeholder="John"
+        placeholder="Enter your username"
         required
         name="username"
         class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md
@@ -59,7 +55,7 @@
         id="password"
         placeholder="••••••••"
         required
-          name="password"
+        name="password"
         class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       />
@@ -72,11 +68,14 @@
              focus:ring-4 focus:ring-blue-300 font-medium rounded-md
              text-sm px-4 py-2 transition"
     >
-      Submit
+      Register
     </button>
+
+    <p class="text-center text-sm text-gray-600 mt-4">
+      Already have an account? <a href="/user/login" class="text-blue-600 hover:underline">Login here</a>
+    </p>
 
   </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 </body>
 </html>

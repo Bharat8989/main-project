@@ -33,7 +33,6 @@ router.post(
 
       const { email, username, password } = req.body;
 
-      // 🔐 Check existing user
       const existingUser = await userModel.findOne({ email });
       if (existingUser) {
         return res.status(409).json({
@@ -41,10 +40,9 @@ router.post(
         });
       }
 
-      // 🔐 Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await userModel.create({
+      await userModel.create({
         email,
         username,
         password: hashedPassword,
@@ -52,13 +50,11 @@ router.post(
 
       return res.status(201).json({
         message: 'Registration successful',
-        user: newUser,
       });
 
     } catch (error) {
       return res.status(500).json({
         message: 'Server error',
-        error: error.message,
       });
     }
   }
@@ -99,7 +95,7 @@ router.post(
         });
       }
 
-      // 🔑 Create JWT token
+      // 🔑 Create JWT
       const token = jwt.sign(
         {
           userId: user._id,
@@ -109,15 +105,21 @@ router.post(
         { expiresIn: '1d' }
       );
 
+      // 🍪 Set cookie
+      res.cookie('token', token, {
+        httpOnly: true,     // 🔐 cannot be accessed by JS
+        secure: process.env.NODE_ENV === 'production', // true in production (HTTPS)
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
+
       return res.status(200).json({
         message: 'Login successful',
-        token,
       });
 
     } catch (error) {
       return res.status(500).json({
         message: 'Server error',
-        error: error.message,
       });
     }
   }
