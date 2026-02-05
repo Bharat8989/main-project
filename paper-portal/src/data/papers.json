@@ -1,0 +1,48 @@
+[
+  {
+    "department": "cse",
+    "year": 1,
+    "semester": 1,
+    "season": "winter",
+    "paperYear": 2015,
+    "subject": "Engineering Mathematics",
+    "file": "/papers/cse/sem1/winter/2015/math1.pdf"
+  },
+  {
+    "department": "cse",
+    "year": 1,
+    "semester": 1,
+    "season": "winter",
+    "paperYear": 2015,
+    "subject": "Physics",
+    "file": "/papers/cse/sem1/winter/2015/physics.pdf"
+  },
+  {
+    "department": "entc",
+    "year": 1,
+    "semester": 2,
+    "season": "winter",
+    "paperYear": 2015,
+    "subject": "C Programming",
+    "file": "/papers/entc/sem2/winter/2015/c-programming.pdf"
+  },
+  {
+    "department": "entc",
+    "year": 2,
+    "semester": 3,
+    "season": "summer",
+    "paperYear": 2016,
+    "subject": "C Programming",
+    "file": "/papers/entc/sem3/summer/2016/c-programming.pdf"
+  },
+  
+  {
+    "department": "cse",
+    "year": 1,
+    "semester": 2,
+    "season": "winter",
+    "paperYear": 2015,
+    "subject": "C Programming",
+    "file": "/papers/cse/sem2/winter/2015/c-programming.pdf"
+  }
+]
