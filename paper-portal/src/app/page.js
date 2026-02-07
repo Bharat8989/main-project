@@ -8,6 +8,11 @@ const cards = [
     path: "/cse",
   },
   {
+    title: "Electrical Engineering",
+    desc: "Electrical department updates and support center.",
+    path: "/electrical",
+  },
+  {
     title: "Electronics & Telecom (ENTC)",
     desc: "All ENTC department related information in one place.",
     path: "/entc",
@@ -18,7 +23,7 @@ const cards = [
     path: "/civil",
   },
   {
-    title: "Information Engineering (IE)",
+    title: "Instrumentation Engineering (IE)",
     desc: "Access IE department academic and exam information.",
     path: "/ie",
   },
@@ -27,11 +32,7 @@ const cards = [
     desc: "Mechanical department notices and study material.",
     path: "/mech",
   },
-  {
-    title: "Electrical Engineering",
-    desc: "Electrical department updates and support center.",
-    path: "/electrical",
-  },
+  
 ];
 
 export default function Home() {

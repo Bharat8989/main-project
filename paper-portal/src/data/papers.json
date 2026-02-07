@@ -12,37 +12,55 @@
     "department": "cse",
     "year": 1,
     "semester": 1,
+    "season": "summer",
+    "paperYear": 2015,
+    "subject": "Engineering Mathematics",
+    "file": "/papers/cse/sem1/summer/2015/math1.pdf"
+  },
+  {
+    "department": "mech",
+    "year": 1,
+    "semester": 1,
     "season": "winter",
     "paperYear": 2015,
     "subject": "Physics",
-    "file": "/papers/cse/sem1/winter/2015/physics.pdf"
+    "file": "/papers/mech/sem1/winter/2015/physics.pdf"
   },
   {
     "department": "entc",
     "year": 1,
-    "semester": 2,
+    "semester": 1,
     "season": "winter",
     "paperYear": 2015,
     "subject": "C Programming",
-    "file": "/papers/entc/sem2/winter/2015/c-programming.pdf"
+    "file": "/papers/entc/sem1/winter/2015/c-programming.pdf"
   },
   {
-    "department": "entc",
-    "year": 2,
-    "semester": 3,
+    "department": "civil",
+    "year": 1,
+    "semester": 1,
     "season": "summer",
-    "paperYear": 2016,
+    "paperYear": 2015,
     "subject": "C Programming",
-    "file": "/papers/entc/sem3/summer/2016/c-programming.pdf"
+    "file": "/papers/civil/sem1/summer/2015/c-programming.pdf"
   },
   
   {
-    "department": "cse",
+    "department": "ie",
     "year": 1,
-    "semester": 2,
+    "semester": 1,
     "season": "winter",
     "paperYear": 2015,
     "subject": "C Programming",
-    "file": "/papers/cse/sem2/winter/2015/c-programming.pdf"
+    "file": "/papers/ie/sem1/winter/2015/c-programming.pdf"
+  },
+   {
+    "department": "electrical",
+    "year": 1,
+    "semester": 1,
+    "season": "winter",
+    "paperYear": 2015,
+    "subject": "Engineering Mathematics",
+    "file": "/papers/electrical/sem1/winter/2015/math1.pdf"
   }
 ]
