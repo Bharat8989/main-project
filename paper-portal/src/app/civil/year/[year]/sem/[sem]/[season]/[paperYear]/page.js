@@ -5,7 +5,7 @@ export default async function PaperList({ params }) {
 
   const filtered = papers.filter(
     (p) =>
-      p.department === "electrical" &&
+      p.department === "civil" &&
       p.year === Number(year) &&
       p.semester === Number(sem) &&
       p.season.toLowerCase() === season.toLowerCase() &&
@@ -20,7 +20,7 @@ export default async function PaperList({ params }) {
           Semester {sem} – {season.toUpperCase()} {paperYear}
         </h1>
         <p className="text-gray-600">
-          Previous year question papers for Electrical department
+          Previous year question papers for Civil department
         </p>
       </div>
 

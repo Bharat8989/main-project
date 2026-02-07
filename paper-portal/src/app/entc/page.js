@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const years = Array.from({ length: 11 }, (_, i) => 2015 + i);
+const years = Array.from({ length: 11 }, (_, i) => 2020 + i);
 
 const entcData = [
   { year: "1st Year", semesters: ["Semester 1", "Semester 2"] },
@@ -11,34 +11,47 @@ const entcData = [
 
 export default function Entc() {
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-4xl font-bold text-center text-purple-600 mb-10">
-        ENTC Department – Question Papers
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
+      {/* Page Title */}
+      <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
+        ENTc Department – Question Papers
       </h1>
 
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="max-w-6xl mx-auto space-y-10">
         {entcData.map((yearBlock, yearIndex) => (
-          <div key={yearIndex} className="bg-white p-6 rounded shadow">
-            <h2 className="text-2xl font-semibold mb-4">
-              {yearBlock.year}
+          <div
+            key={yearIndex}
+            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6"
+          >
+            {/* Year Title */}
+            <h2 className="text-2xl font-bold text-gray-700 mb-6 border-b pb-2">
+              🎓 {yearBlock.year}
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               {yearBlock.semesters.map((sem, semIndex) => {
                 const actualSem = yearIndex * 2 + semIndex + 1;
 
                 return (
-                  <div key={semIndex} className="border p-4 rounded">
-                    <h3 className="font-semibold mb-3">{sem}</h3>
+                  <div
+                    key={semIndex}
+                    className="border rounded-xl p-5 bg-gray-50 hover:bg-gray-100 transition"
+                  >
+                    {/* Semester */}
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                      📘 {sem}
+                    </h3>
 
                     {/* Winter */}
-                    <p className="font-medium mb-1">Winter</p>
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <p className="font-medium text-gray-600 mb-2">
+                      ❄️ Winter
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {years.map((yr) => (
                         <Link
                           key={`w-${yr}`}
                           href={`/entc/year/${yearIndex + 1}/sem/${actualSem}/winter/${yr}`}
-                          className="px-3 py-1 bg-blue-100 rounded hover:bg-blue-200"
+                          className="px-3 py-1 text-xl font-medium bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition"
                         >
                           {yr}
                         </Link>
@@ -46,19 +59,20 @@ export default function Entc() {
                     </div>
 
                     {/* Summer */}
-                    <p className="font-medium mb-1">Summer</p>
+                    <p className="font-medium text-gray-600 mb-2">
+                      ☀️ Summer
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {years.map((yr) => (
                         <Link
                           key={`s-${yr}`}
                           href={`/entc/year/${yearIndex + 1}/sem/${actualSem}/summer/${yr}`}
-                          className="px-3 py-1 bg-green-100 rounded hover:bg-green-200"
+                          className="px-3 py-1 text-xl font-medium bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition"
                         >
                           {yr}
                         </Link>
                       ))}
                     </div>
-
                   </div>
                 );
               })}

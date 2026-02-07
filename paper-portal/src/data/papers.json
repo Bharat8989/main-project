@@ -4,9 +4,9 @@
     "year": 1,
     "semester": 1,
     "season": "winter",
-    "paperYear": 2015,
+    "paperYear": 2020,
     "subject": "Engineering Mathematics",
-    "file": "/papers/cse/sem1/winter/2015/math1.pdf"
+    "file": "/papers/cse/sem1/winter/2020/math1.pdf"
   },
   {
     "department": "cse",
@@ -15,7 +15,7 @@
     "season": "summer",
     "paperYear": 2015,
     "subject": "Engineering Mathematics",
-    "file": "/papers/cse/sem1/summer/2015/math1.pdf"
+    "file": "/papers/cse/sem1/summer/2020/math1.pdf"
   },
   {
     "department": "mech",

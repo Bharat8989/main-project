@@ -1,0 +1,112 @@
+/* Page Layout */
+.home {
+  min-height: 100vh;
+  background: #dfe3ea;
+  padding: 2rem;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  color: #000000;
+}
+
+/* Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Card */
+.card {
+  --white: #000000;
+  --paragraph: #000000;
+  --line: #9ca3af;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1.25rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Animated Border */
+.card__border {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+.card__border::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    #d38dd900,
+    transparent
+  );
+  animation: rotate 6s linear infinite;
+}
+
+
+
+/* @keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+/* Text */
+.card_title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.card_paragraph {
+  font-size: 0.8rem;
+  color: #000000;
+  margin-top: 0.25rem;
+}
+
+/* Divider */
+.line {
+  height: 1px;
+  background-color: var(--line);
+  border: none;
+}
+
+/* Button */
+.button {
+  margin-top: auto;
+  text-align: center;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  color: #000000;
+  text-decoration: none;
+  border-radius: 999px;
+
+  background: linear-gradient(0deg, #e5e7eb, #9ca3af);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}

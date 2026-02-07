@@ -20,7 +20,7 @@ function NavBar() {
       <div className="nav-container">
 
         <Link href="/" className="nav-logo" onClick={closeMobileMenu}>
-          <span>CodeBucks</span>
+          <span>PaperHub</span>
           <span className="icon">
             <CodeIcon />
           </span>
