@@ -1,5 +1,33 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "CSE Question Papers |  PYQ",
+  description:
+    "Download Computer Science Engineering (CSE) previous year question papers of Gondwana University. Access semester-wise Winter and Summer exam papers from 2020 onwards.",
+
+  keywords: [
+    "CSE previous year question papers",
+    "Computer Science Engineering PYQ",
+    "Gondwana University CSE papers",
+    "CSE semester wise question papers",
+    "CSE winter summer exam papers",
+    "Engineering PYQ CSE Gondwana University",
+  ],
+
+  openGraph: {
+    title: "CSE Question Papers | PaperHub",
+    description:
+      "Semester-wise Computer Science Engineering previous year question papers of Gondwana University.",
+    siteName: "PaperHub",
+    type: "website",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
 const years = Array.from({ length: 11 }, (_, i) => 2020 + i);
 
 const cseData = [
@@ -12,7 +40,6 @@ const cseData = [
 export default function Cse() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
-      {/* Page Title */}
       <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
         CSE Department – Question Papers
       </h1>
@@ -23,7 +50,6 @@ export default function Cse() {
             key={yearIndex}
             className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6"
           >
-            {/* Year Title */}
             <h2 className="text-2xl font-bold text-gray-700 mb-6 border-b pb-2">
               🎓 {yearBlock.year}
             </h2>
@@ -37,15 +63,11 @@ export default function Cse() {
                     key={semIndex}
                     className="border rounded-xl p-5 bg-gray-50 hover:bg-gray-100 transition"
                   >
-                    {/* Semester */}
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
                       📘 {sem}
                     </h3>
 
-                    {/* Winter */}
-                    <p className="font-medium text-gray-600 mb-2">
-                      ❄️ Winter
-                    </p>
+                    <p className="font-medium text-gray-600 mb-2">❄️ Winter</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {years.map((yr) => (
                         <Link
@@ -58,10 +80,7 @@ export default function Cse() {
                       ))}
                     </div>
 
-                    {/* Summer */}
-                    <p className="font-medium text-gray-600 mb-2">
-                      ☀️ Summer
-                    </p>
+                    <p className="font-medium text-gray-600 mb-2">☀️ Summer</p>
                     <div className="flex flex-wrap gap-2">
                       {years.map((yr) => (
                         <Link

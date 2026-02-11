@@ -1,7 +1,8 @@
-import papers from "@/data/papers.json";
+import papers from "@/data/cse/papers.json";
 
 export default async function PaperList({ params }) {
   const { year, sem, season, paperYear } = await params;
+  
 
   const filtered = papers.filter(
     (p) =>
