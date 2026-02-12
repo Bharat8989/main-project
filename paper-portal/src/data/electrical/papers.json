@@ -1,66 +1,20 @@
 [
   {
-    "department": "cse",
+    "department": "electrical",
     "year": 1,
     "semester": 1,
     "season": "winter",
     "paperYear": 2020,
     "subject": "Engineering Mathematics",
-    "file": "/papers/cse/sem1/winter/2020/math1.pdf"
+    "file": "/papers/electrical/sem1/winter/2020/math1.pdf"
   },
   {
-    "department": "cse",
-    "year": 1,
-    "semester": 1,
-    "season": "summer",
-    "paperYear": 2015,
-    "subject": "Engineering Mathematics",
-    "file": "/papers/cse/sem1/summer/2020/math1.pdf"
-  },
-  {
-    "department": "mech",
-    "year": 1,
-    "semester": 1,
-    "season": "winter",
-    "paperYear": 2015,
-    "subject": "Physics",
-    "file": "/papers/mech/sem1/winter/2015/physics.pdf"
-  },
-  {
-    "department": "entc",
-    "year": 1,
-    "semester": 1,
-    "season": "winter",
-    "paperYear": 2015,
-    "subject": "C Programming",
-    "file": "/papers/entc/sem1/winter/2015/c-programming.pdf"
-  },
-  {
-    "department": "civil",
-    "year": 1,
-    "semester": 1,
-    "season": "summer",
-    "paperYear": 2015,
-    "subject": "C Programming",
-    "file": "/papers/civil/sem1/summer/2015/c-programming.pdf"
-  },
-  
-  {
-    "department": "ie",
-    "year": 1,
-    "semester": 1,
-    "season": "winter",
-    "paperYear": 2015,
-    "subject": "C Programming",
-    "file": "/papers/ie/sem1/winter/2015/c-programming.pdf"
-  },
-   {
     "department": "electrical",
     "year": 1,
     "semester": 1,
-    "season": "winter",
-    "paperYear": 2015,
+    "season": "summer",
+    "paperYear": 2020,
     "subject": "Engineering Mathematics",
-    "file": "/papers/electrical/sem1/winter/2015/math1.pdf"
+    "file": "/papers/electrical/sem1/summer/2020/math1.pdf"
   }
 ]
