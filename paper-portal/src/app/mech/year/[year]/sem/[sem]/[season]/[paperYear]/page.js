@@ -1,4 +1,4 @@
-import papers from "@/data/papers.json";
+import papers from "@/data/mech/papers.json";
 
 export default async function PaperList({ params }) {
   const { year, sem, season, paperYear } = await params;

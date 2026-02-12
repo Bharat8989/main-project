@@ -1,5 +1,33 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Mechanical Engineering Question Papers | PYQ",
+  description:
+    "Download Mechanical Engineering previous year question papers of Gondwana University. Access semester-wise Winter and Summer exam papers from 2020 onwards.",
+
+  keywords: [
+    "Mechanical previous year question papers",
+    "Mechanical Engineering PYQ",
+    "Gondwana University Mechanical papers",
+    "Mechanical semester wise question papers",
+    "Mechanical winter summer exam papers",
+    "Engineering PYQ Mechanical Gondwana University",
+  ],
+
+  openGraph: {
+    title: "Mechanical Engineering Question Papers | PaperHub",
+    description:
+      "Semester-wise Mechanical Engineering previous year question papers of Gondwana University.",
+    siteName: "PaperHub",
+    type: "website",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
 const years = Array.from({ length: 11 }, (_, i) => 2020 + i);
 
 const mechData = [
@@ -12,9 +40,8 @@ const mechData = [
 export default function Mech() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
-      {/* Page Title */}
       <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
-        MECH Department – Question Papers
+        Mechanical Department – Question Papers
       </h1>
 
       <div className="max-w-6xl mx-auto space-y-10">
@@ -23,7 +50,6 @@ export default function Mech() {
             key={yearIndex}
             className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6"
           >
-            {/* Year Title */}
             <h2 className="text-2xl font-bold text-gray-700 mb-6 border-b pb-2">
               🎓 {yearBlock.year}
             </h2>
@@ -37,12 +63,10 @@ export default function Mech() {
                     key={semIndex}
                     className="border rounded-xl p-5 bg-gray-50 hover:bg-gray-100 transition"
                   >
-                    {/* Semester */}
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
                       📘 {sem}
                     </h3>
 
-                    {/* Winter */}
                     <p className="font-medium text-gray-600 mb-2">
                       ❄️ Winter
                     </p>
@@ -58,7 +82,6 @@ export default function Mech() {
                       ))}
                     </div>
 
-                    {/* Summer */}
                     <p className="font-medium text-gray-600 mb-2">
                       ☀️ Summer
                     </p>

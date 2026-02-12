@@ -1,5 +1,42 @@
 import Link from "next/link";
 
+/* ============================= */
+/* ✅ SEO METADATA */
+/* ============================= */
+
+export const metadata = {
+  title: "Electronics & Telecommunication Engineering Question Papers | PYQ",
+  description:
+    "Download Electronics & Telecommunication Engineering previous year question papers of Gondwana University. Access semester-wise Winter and Summer exam papers from 2020 onwards.",
+
+  keywords: [
+    "ENTC previous year question papers",
+    "Electronics and Telecommunication Engineering PYQ",
+    "Gondwana University ENTC papers",
+    "ENTC semester wise question papers",
+    "ENTC winter summer exam papers",
+    "Engineering PYQ ENTC Gondwana University",
+  ],
+
+  openGraph: {
+    title: "ENTC Question Papers | PaperHub",
+    description:
+      "Semester-wise Electronics & Telecommunication Engineering previous year question papers of Gondwana University.",
+    siteName: "PaperHub",
+    type: "website",
+    locale: "en_IN",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+/* ============================= */
+/* ✅ DATA */
+/* ============================= */
+
 const years = Array.from({ length: 11 }, (_, i) => 2020 + i);
 
 const entcData = [
@@ -9,12 +46,17 @@ const entcData = [
   { year: "4th Year", semesters: ["Semester 7", "Semester 8"] },
 ];
 
+/* ============================= */
+/* ✅ COMPONENT */
+/* ============================= */
+
 export default function Entc() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
+
       {/* Page Title */}
       <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
-        ENTc Department – Question Papers
+        Electronics & Telecommunication Engineering – Question Papers
       </h1>
 
       <div className="max-w-6xl mx-auto space-y-10">
@@ -42,7 +84,7 @@ export default function Entc() {
                       📘 {sem}
                     </h3>
 
-                    {/* Winter */}
+                    {/* Winter Section */}
                     <p className="font-medium text-gray-600 mb-2">
                       ❄️ Winter
                     </p>
@@ -51,14 +93,14 @@ export default function Entc() {
                         <Link
                           key={`w-${yr}`}
                           href={`/entc/year/${yearIndex + 1}/sem/${actualSem}/winter/${yr}`}
-                          className="px-3 py-1 text-xl font-medium bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition"
+                          className="px-3 py-1 text-lg font-medium bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition"
                         >
                           {yr}
                         </Link>
                       ))}
                     </div>
 
-                    {/* Summer */}
+                    {/* Summer Section */}
                     <p className="font-medium text-gray-600 mb-2">
                       ☀️ Summer
                     </p>
@@ -67,12 +109,13 @@ export default function Entc() {
                         <Link
                           key={`s-${yr}`}
                           href={`/entc/year/${yearIndex + 1}/sem/${actualSem}/summer/${yr}`}
-                          className="px-3 py-1 text-xl font-medium bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition"
+                          className="px-3 py-1 text-lg font-medium bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition"
                         >
                           {yr}
                         </Link>
                       ))}
                     </div>
+
                   </div>
                 );
               })}
